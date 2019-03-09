@@ -41,20 +41,20 @@ function printQuote() {
 	strHTML += random_quote.quote;
 	strHTML += '</p><br><p class="source">';
 	strHTML += random_quote.source;
-	if(random_quote.actor!=null) {
+	if(random_quote.actor) {
 		strHTML += " - "+random_quote.actor;
 	}
-	if(random_quote.citation!=null) {
+	if(random_quote.citation) {
 		strHTML += '<span class="citation">';
 		strHTML += random_quote.citation;
 		strHTML += '</span>';
 	}
-	if(random_quote.year!=null) {
+	if(random_quote.year) {
 		strHTML += '<span class="year">';
 		strHTML += random_quote.year;
 		strHTML += '</span>';
 	}
-	if(random_quote.categorization!=null) {
+	if(random_quote.categorization) {
 		strHTML += '<span class="categorization">';
 		strHTML += random_quote.categorization;
 		strHTML += '</span>';
