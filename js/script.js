@@ -1,56 +1,71 @@
 /******************************************
-Treehouse FSJS Techdegree:
-project 1 - A Random Quote Generator
+A Random Quote Generator
+ - Kieran Shepherd
+ - 09/03/2019
 ******************************************/
 
-// Study guide for this project - https://drive.google.com/file/d/1s5grutGuQFwJcQP8bFwEI69Q8FCkGdDk/view?usp=sharing
+/*Initializes an array of quote objects*/
+var quotes = [
+	{ quote:"I'm going to make him an offer he can't refuse.", source:"The Godfather", categorization:"Mafia", actor:"Marlon Brando" },
+	{ quote:"What we've got here is failure to communicate.", source:"Cool Hand Luke", citation:"Top 100 Movie Quotes", year:1967 },
+	{ quote:"You've got to ask yourself one question: 'Do I feel lucky?' Well, do ya, punk?", source:"Dirty Harry", actor:"Clint Eastwood" },
+	{ quote:"Get your stinking paws off me, you damned dirty ape.", source:"Planet of the Apes", categorization:"Science Fiction" },
+	{ quote:"Open the pod bay doors, HAL.", source:"2001", citation:"Top 100 Movie Quotes", year:1968 },
+	{ quote:"Who's on first.", source:"The Naughty Nineties", citation:"Top 100 Movie Quotes", year:1945 },
+	{ quote:"You don't understand! I coulda had class. I coulda been a contender.", source:"On the Waterfront", citation:"Top 100 Movie Quotes", year:1954 },
+	{ quote:"I love the smell of napalm in the morning.", source:"Apocalypse Now", categorization:"War", actor:"Robert Duvall" },
+	{ quote:"Badges? We ain't got no badges! We don't need no badges! I don't have to show you any stinking badges!", source:"The Treasure of the Sierra Madre", citation:"Top 100 Movie Quotes", year:1948 },
+	{ quote:"One morning I shot an elephant in my pajamas. How he got in my pajamas, I don't know.", source:"Animal Crackers" }
+];
 
+/*Returns a random quote object from the quotes array*/
+function getRandomQuote(quotes) {
+	var rand = Math.floor(Math.random()*10);
+	return quotes[rand];
+}
 
-/*** 
-  Create the array of quote objects and name it `quotes`.
-  Add at least five quote objects to the `quotes` array.
-  Give each quote object a `quote` and `source` property.
-  Add the `citation` property to at least one object in the array.
-  Add the `year` property to at least one object in the array.
-  Use console.log() to log your array of quotes to the console.
-***/
+/*Gets a random object from the quotes array and builds an HTML string for output. Adds to page using innerHTML.*/
+function printQuote() {
+	
+	var colourBackgroundArray = ["lightgreen", "lightblue", "lightgrey"];
+	var colourButtonArray = ["green", "blue", "grey"];
+	var randColourIndex = Math.floor(Math.random()*colourBackgroundArray.length + 1)
+	var randBackgroundColour = colourBackgroundArray[randColourIndex];
+	var randButtonColour = colourButtonArray[randColourIndex];
+	document.body.style.backgroundColor = randBackgroundColour;
+	document.getElementById('loadQuote').style.backgroundColor = randButtonColour;
+	
+	var random_quote = getRandomQuote(quotes);
+	var strHTML = '';
+	strHTML += '<p class="quote">';
+	strHTML += random_quote.quote;
+	strHTML += '</p><br><p class="source">';
+	strHTML += random_quote.source;
+	if(random_quote.actor!=null) {
+		strHTML += " - "+random_quote.actor;
+	}
+	if(random_quote.citation!=null) {
+		strHTML += '<span class="citation">';
+		strHTML += random_quote.citation;
+		strHTML += '</span>';
+	}
+	if(random_quote.year!=null) {
+		strHTML += '<span class="year">';
+		strHTML += random_quote.year;
+		strHTML += '</span>';
+	}
+	if(random_quote.categorization!=null) {
+		strHTML += '<span class="categorization">';
+		strHTML += random_quote.categorization;
+		strHTML += '</span>';
+	}
+	strHTML += '</p>';
+	document.getElementById("quote-box").innerHTML = strHTML;
+}
 
+/*Run printQuote every 5 seconds*/
+setInterval(printQuote, 5000);
 
-
-
-/***
-  Create the `getRandomQuote` function to:
-   - Create a variable to store a random number 
-   - Cse the random number to `return` a random quote object from the `quotes` array.
-***/
-
-
-
-
-/***
-  Create the `printQuote` function to: 
-   - Call the `getRandomQuote` function and assign it to a variable.
-   - Create a variable for the HTML string and set it equal to an empty string.
-   - Use the HTML template in the instructions or the markup in the index.html file, AND 
-     the random quote vairable to build your HTML string.
-   - Add the quote and source section to the HTML string.
-   - Use an if statement to check for the citation property before adding it to the HTML string.
-   - Use an if statement to check for the year property before adding it to the HTML string.
-   - Don't forget to close that final `p` tag.
-   - Set the `innerHTML` of the `quote-box` div to the HTML string. 
-***/
-
-
-
-
-/***
-  When the "Show another quote" button is clicked, the event listener 
-  below will be triggered, and it will call, or "invoke", the `printQuote` 
-  function. So do not make any changes to the line of code below this 
-  comment.
-***/
-
+/*Run printQuote on button click*/
 document.getElementById('loadQuote').addEventListener("click", printQuote, false);
 
-
-// Remember to delete the comments that came with this file, and replace them with your own code comments.
